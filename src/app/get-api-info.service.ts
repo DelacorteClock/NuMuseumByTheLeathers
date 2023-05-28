@@ -8,7 +8,7 @@ const apiUrl = 'https://rubbersuitleatherpantsspacesuit.onrender.com/';
 @Injectable({
   providedIn: 'root'
 })
-export class UserRegistrationService {
+export class GetApiInfoService {
     constructor(private http: HttpClient) {
     }
     public userRegistration(userDetails: any): Observable<any> {

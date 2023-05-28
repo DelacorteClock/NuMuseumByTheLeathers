@@ -1,0 +1,36 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title><h2>Create Account</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <form>
+            <mat-form-field>
+                <mat-label>Forename</mat-label>
+                <input matInput [(ngModel)]='userInfo.userForename' type='text' placeholder='Your Forename' name='Forename' pattern='[A-Za-z]{2,}' required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Surname</mat-label>
+                <input matInput [(ngModel)]='userInfo.userSurname' type='text' placeholder='Your Surname' name='Surname' pattern='[A-Za-z]{2,}' required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Username</mat-label>
+                <input matInput [(ngModel)]='userInfo.userUsername' type='text' placeholder='Your Username (5+ Characters)' name='Username' pattern='\w{5,}' required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Code</mat-label>
+                <input matInput [(ngModel)]='userInfo.userCode' type='password' placeholder='Your Code (10+ Characters)' name='Code' minLength='10' required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput [(ngModel)]='userInfo.userEmail' type='email' placeholder='Your Email' name='Email' required>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Birthday (Optional: For Annual Gift)</mat-label>
+                <input matInput [(ngModel)]='userInfo.userCelebrate' type='date' min='2024-01-01' max='2024-12-31' name='Birthday'>
+            </mat-form-field>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-raised-button (click)='registerUser()' color='primary'>Submit</button>
+    </mat-card-actions>
+</mat-card>
