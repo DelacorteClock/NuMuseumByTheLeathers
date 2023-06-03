@@ -11,7 +11,7 @@
     <div>Surname: {{user.userSurname}}</div>
     <div>Birthday: {{user.userCelebrate.split('T')[0].split('-')[2]}} {{dateMake(user.userCelebrate.split('T')[0].split('-')[1])}}</div>
     <div>Email: {{user.userEmail}}</div>
-    <button mat-raised-button (click)='linkTo("profile/edit")'>Edit User</button>
+    <button mat-raised-button (click)='linkTo("profile/edit")' color='accent'>Edit User</button>
     <h3>{{favourites.length > 0 ? 'Favourites' : ''}}</h3>
     <div style='display: flex'>
     <mat-card *ngFor='let favourite of favourites' style='flex: 1 1 auto'>
