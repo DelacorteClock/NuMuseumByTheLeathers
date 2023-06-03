@@ -39,32 +39,39 @@ export class GetApiInfoService {
         return this.http.get(apiUrl + 'departments/id/' + id, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
     }
     public getUser(): Observable<any> {
-        const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user') || '{}');
-        return this.http.get(apiUrl + 'users/username/' + user.userUsername, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
+        return user;
     }
     public getUserFavourites(): Observable<any> {
-        const token = localStorage.getItem('token');
         const user = JSON.parse(localStorage.getItem('user') || '{}');
-        return this.http.get(apiUrl + 'users/username/' + user.userUsername, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), map((info) => {info.userFavourites}), catchError(this.handleError));
+        return user.userFavourites;
+    }
+    public isFavourite(fav: string): boolean {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        return user.userFavourites.includes(fav);
     }
     public postUserFavourite(fav: string): Observable<any> {
         const token = localStorage.getItem('token');
         var user = JSON.parse(localStorage.getItem('user') || '{}');
         user.userFavourites.push(fav);
         localStorage.setItem('user', JSON.stringify(user));
-        return this.http.post(apiUrl + 'users/username/' + user.userUsername + '/favitem/' + fav, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
+        console.log(token);
+        return this.http.post(apiUrl + 'users/username/' + user.userUsername + '/favitem/' + fav, {}, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
     }
     public deleteUserFavourite(fav: string): Observable<any> {
         const token = localStorage.getItem('token');
         var user = JSON.parse(localStorage.getItem('user') || '{}');
-        user.userFavourites.filter((id: string) => {id !== fav});
+        var newFavourites: string[] = []; 
+        user.userFavourites.forEach((id: string) => {if (id !== fav) {newFavourites.push(id);}});
+        user.userFavourites = newFavourites;
         localStorage.setItem('user', JSON.stringify(user));
+        console.log(apiUrl + 'users/username/' + user.userUsername + '/favitem/' + fav, token, user);
         return this.http.delete(apiUrl + 'users/username/' + user.userUsername + '/favitem/' + fav, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
     }
     public editUser(newInfo: any): Observable<any> {
         const token = localStorage.getItem('token');
         var user = JSON.parse(localStorage.getItem('user') || '{}');
+        console.warn(newInfo);
         return this.http.put(apiUrl + 'users/username/' + user.userUsername, newInfo, {headers: new HttpHeaders({Authorization: 'Bearer ' + token})}).pipe(map(this.extractResponseInfo), catchError(this.handleError));
     }
     public deleteUser(): Observable<any> {

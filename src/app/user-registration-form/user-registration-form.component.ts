@@ -17,10 +17,7 @@ export class UserRegistrationFormComponent implements OnInit {
     ) {}
     ngOnInit(): void {}
     registerUser(): void {
-        this.getApiInfo.userRegistration(this.userInfo).subscribe((res) => {
-        console.log(res);
-        this.dialogueRef.close();
-        this.snackBar.open('Registration Succeeded', 'Close', {duration: 3000});
-    }, (res) => {console.log(res); this.snackBar.open(res ? res : 'Registration Failed', 'Close', {duration: 3000});});
+        this.getApiInfo.userRegistration(this.userInfo).subscribe((res) => {console.log(res); this.dialogueRef.close(); this.snackBar.open('Registration Succeeded', 'Close', {duration: 3000});}, 
+        (res) => {console.log(res); this.snackBar.open(res ? res : 'Registration Failed', 'Close', {duration: 3000});});
     }
 }

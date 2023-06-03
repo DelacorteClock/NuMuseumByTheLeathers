@@ -1,0 +1,33 @@
+<div>
+    <button mat-button (click)='linkTo("collection")'>Collection</button>
+    <button mat-button color='primary'><b>Profile</b></button>
+    <button mat-button (click)='logout()'>Logout</button>
+</div>
+<div>
+    <h2>{{user.userForename}} {{user.userSurname}}'s Profile</h2>
+    <h3>Profile Details</h3>
+    <div>Username: {{user.userUsername}}</div>
+    <div>Forename: {{user.userForename}}</div>
+    <div>Surname: {{user.userSurname}}</div>
+    <div>Birthday: {{user.userCelebrate.split('T')[0].split('-')[2]}} {{dateMake(user.userCelebrate.split('T')[0].split('-')[1])}}</div>
+    <div>Email: {{user.userEmail}}</div>
+    <button mat-raised-button (click)='linkTo("profile/edit")'>Edit User</button>
+    <h3>{{favourites.length > 0 ? 'Favourites' : ''}}</h3>
+    <div style='display: flex'>
+    <mat-card *ngFor='let favourite of favourites' style='flex: 1 1 auto'>
+        <mat-card-header>
+            <mat-card-title>{{favourite.title}}</mat-card-title>
+            <mat-card-subtitle>{{favourite.artist.artistName}}</mat-card-subtitle>
+        </mat-card-header>
+        <div class='container-img'>
+            <img src={{favourite.primaryImage}} alt={{favourite.objectName}} class='img-fullsize' />
+        </div>
+        <mat-card-actions>
+            <button mat-button color='primary' (click)='openDescriptionDialogue(favourite.title, favourite.description)'>Description</button>
+            <button mat-button color='primary' (click)='openDescriptionDialogue(favourite.artist.artistName, favourite.artist.artistBiography)'>Artist</button>
+            <button mat-button color='primary' (click)='openDescriptionDialogue(favourite.department.deptTitle, favourite.department.deptDescription)'>Department</button>
+            <button (click)='deleteFavourite(favourite._id)' class='invisible'><span class='material-icons'>favorite</span></button>
+        </mat-card-actions>
+    </mat-card>
+</div>
+</div>

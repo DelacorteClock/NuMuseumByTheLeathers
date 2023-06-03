@@ -1,0 +1,42 @@
+<div>
+    <button mat-button (click)='linkTo("collection")'>Collection</button>
+    <button mat-button (click)='linkTo("profile")'>Profile</button>
+    <button mat-button (click)='logout()'>Logout</button>
+</div>
+<div style='max-width: 350px; flex-direction: column'>
+    <h2>Edit Profile</h2>
+    <form>
+        <mat-form-field>
+            <mat-label>Forename</mat-label>
+            <input matInput [(ngModel)]='userInfo.userForename' type='text' placeholder='Your Forename' name='Forename' pattern='[A-Za-z]{2,}'>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Surname</mat-label>
+            <input matInput [(ngModel)]='userInfo.userSurname' type='text' placeholder='Your Surname' name='Surname' pattern='[A-Za-z]{2,}'>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Username</mat-label>
+            <input matInput [(ngModel)]='userInfo.userUsername' type='text' placeholder='Your Username (5+ Characters)' name='Username' pattern='\w{5,}'>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Code</mat-label>
+            <input matInput [(ngModel)]='userInfo.userCode' type='password' placeholder='Your Code (10+ Characters)' name='Code' minLength='10'>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput [(ngModel)]='userInfo.userEmail' type='email' placeholder='Your Email' name='Email'>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Birthday (Optional: For Annual Gift)</mat-label>
+            <input matInput [(ngModel)]='userInfo.userCelebrate' type='date' min='2024-01-01' max='2024-12-31' name='Birthday'>
+        </mat-form-field>
+        <br>
+        <button mat-raised-button (click)='linkTo("profile")' color='accent' style='margin-right: 15px'>Go Back</button>
+        <button mat-raised-button (click)='editUser()' color='primary'>Submit</button>
+    </form>
+    <br>
+    <br>
+    <hr style='background-color: red; height: 3px; border: none'>
+    <h2>Delete Account Permanently</h2>
+    <button mat-raised-button color='primary' style='width:100%' (click)='forceDelete()'><h1>FORCE DELETE</h1></button>
+</div>

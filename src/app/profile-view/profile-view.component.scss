@@ -1,0 +1,15 @@
+.container-img {
+    height: 300px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-fullsize {
+    max-width: 95%;
+    max-height: 100%;
+}
+.invisible {
+    border: none;
+    background-color: #00000000;
+}
