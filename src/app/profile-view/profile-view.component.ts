@@ -18,6 +18,9 @@ export class ProfileViewComponent implements OnInit {
     ngOnInit(): void {
         this.getUserInfo();
     }
+    /**
+    * Get user (and set its info) thru GetApiInfoService and fill array of user favourites
+    */
     getUserInfo(): void {
         this.user = this.getApiInfo.getUser();
         var favouritesArray = this.user.userFavourites;
@@ -28,19 +31,35 @@ export class ProfileViewComponent implements OnInit {
             console.log(this.favourites);
         });
     }
+    /**
+    * Switch to NuMuseum url ending in a suffix
+    * @param suffix - Suffix of url within NuMuseum site
+    */
     linkTo(suffix: string): void{
         this.router.navigate([suffix]);
     }
+    /**
+    * Logout user by clearing user info and token from localstorage and then going to login page
+    */
     logout(): void {
         localStorage.clear();
         this.router.navigate(['start']);
     }
+    /**
+    * Delete user favourite thru GetApiInfoService
+    * @param uuid - The uuid of an item
+    */
     deleteFavourite(uuid: string): void {
         this.getApiInfo.deleteUserFavourite(uuid).subscribe(function (res) {});
         var newFavourites: string[] = [];
         this.favourites.forEach((currentItem: any) => {if (currentItem._id !== uuid) {newFavourites.push(currentItem);}});
         this.favourites = newFavourites;
     }
+    /**
+    * Generate name of month corresponding to two digit month number
+    * @param num - Two digit (eg '01' not '1', '07' not '7') number representing month
+    * @returns Name of month (with first letter capitalised) or 'NO MONTH' for bad input
+    */
     dateMake(num: string): string {
         switch(num) {
             case '01': return 'January';
@@ -58,7 +77,11 @@ export class ProfileViewComponent implements OnInit {
             default: return 'NO MONTH'
         }
     }
-    //Details
+    /**
+    * Open InfoBox dialogue with specific title (for head) and description (for paragraph)
+    * @param title - The title to be the head of the InfoBox
+    * @param desc - The description to be the paragraph of the InfoBox
+    */
     openDescriptionDialogue(title: string, desc: string): void {
         this.dialogue.open(InfoBoxComponent, {data: {head: title, paragraph: desc}, width: '350px'});
     }

@@ -15,13 +15,21 @@ export class StartPageComponent implements OnInit {
         ngOnInit(): void {
             this.tokenExists();
         }
+        /**
+        * Open UserRegistrationFormComponent (form to signup) in dialogue
+        */
         openUserRegistrationDialogue(): void {
             this.dialogue.open(UserRegistrationFormComponent, {width: '350px'});
         }
+        /**
+        * Open UserLoginFormComponent (form to login) in dialogue
+        */
         openUserLoginDialogue(): void {
             this.dialogue.open(UserLoginFormComponent, {width: '350px'});
         }
-        //Redirect to collection if token exists
+        /**
+        * Redirect logged in user with token to collection page
+        */
         tokenExists(): void {
             if (localStorage.getItem('token')) {this.router.navigate(['collection']);};
         }

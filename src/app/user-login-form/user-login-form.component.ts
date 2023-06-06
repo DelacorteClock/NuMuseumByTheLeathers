@@ -18,6 +18,9 @@ export class UserLoginFormComponent implements OnInit {
         public router: Router
     ) {}
     ngOnInit(): void {}
+    /**
+    * Login user with userInfo from input thru GetApiInfoService
+    */
     loginUser(): void {
         this.getApiInfo.userLogin(this.userInfo).subscribe((res) => {
         console.log(res);
